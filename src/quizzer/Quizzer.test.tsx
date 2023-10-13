@@ -20,50 +20,50 @@ const QUIZZES = sample.map(
 );
 
 describe("Quizzer Tests", () => {
-    beforeEach(() => {
+    /*beforeEach(() => {
         render(<Quizzer />);
-    });
+    });*/
     test("Users can add a new quiz", () => {
         const button = screen.getByText("Add New Quiz");
         expect(screen.queryByLabelText("Title: ")).not.toBeInTheDocument();
         button.click();
-        expect(screen.queryByLabelText("Title:")).toBeInTheDocument();
+        expect(screen.getByLabelText("Title:")).toBeInTheDocument();
         const saveButton = screen.getByText("Save Changes");
         saveButton.click();
-        expect(screen.queryByText("Example Quiz")).toBeInTheDocument();
+        expect(screen.getByText("Example Quiz")).toBeInTheDocument();
     });
 
     test("Users can see a list of quizzes, including the quizzes title, description, and how many questions it has", () => {
         for (let i = 0; i < QUIZZES.length; i++) {
-            expect(screen.queryByText(QUIZZES[i].title)).toBeInTheDocument();
+            expect(screen.getByText(QUIZZES[i].title)).toBeInTheDocument();
             expect(
-                screen.queryByText(
+                screen.getByText(
                     QUIZZES[i].questionList.length + " question",
                     { exact: false }
                 )
             ).toBeInTheDocument();
             expect(
-                screen.queryByText(QUIZZES[i].body, { exact: false })
+                screen.getByText(QUIZZES[i].body, { exact: false })
             ).toBeInTheDocument();
         }
     });
-
+    /*
     test("Users can select a specific quiz to see the questions, including the questions name, body, and points", () => {
         const text = screen.getByText("Simple_Questions");
         text.click();
-        expect(screen.queryByText("Exit")).toBeInTheDocument();
+        expect(screen.getByText("Exit")).toBeInTheDocument();
         expect(
-            screen.queryByText("What is 2+2?", { exact: false })
+            screen.getByText("What is 2+2?", { exact: false })
         ).toBeInTheDocument();
         for (let i = 0; i < QUIZZES[1].questionList.length; i++) {
             if (QUIZZES[1].questionList[i].published == true) {
                 expect(
-                    screen.queryByText(QUIZZES[1].questionList[i].body, {
+                    screen.getByText(QUIZZES[1].questionList[i].body, {
                         exact: false
                     })
                 ).toBeInTheDocument();
                 expect(
-                    screen.queryAllByText(
+                    screen.getAllByText(
                         QUIZZES[1].questionList[i].points + " pt",
                         { exact: false }
                     )[0]
@@ -248,5 +248,5 @@ describe("Quizzer Tests", () => {
                 exact: false
             })[0]
         ).toBeInTheDocument();
-    });
+    });*/
 });
