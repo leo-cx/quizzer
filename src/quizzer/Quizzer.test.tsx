@@ -1,9 +1,9 @@
-//import React from "react";
-import { screen } from "@testing-library/react";
+import React from "react";
+import { render, screen } from "@testing-library/react";
 import { Quiz } from "../interfaces/quiz";
 import { Question, QuestionType } from "../interfaces/question";
-//import { Quizzer } from "./Quizzer";
-//import userEvent from "@testing-library/user-event";
+import { Quizzer } from "./Quizzer";
+import userEvent from "@testing-library/user-event";
 import sample from "../data/quizzes.json";
 
 const QUIZZES = sample.map(
@@ -20,9 +20,9 @@ const QUIZZES = sample.map(
 );
 
 describe("Quizzer Tests", () => {
-    /*beforeEach(() => {
+    beforeEach(() => {
         render(<Quizzer />);
-    });*/
+    });
     test("Users can add a new quiz", () => {
         const button = screen.getByText("Add New Quiz");
         expect(screen.queryByLabelText("Title: ")).not.toBeInTheDocument();
@@ -47,7 +47,7 @@ describe("Quizzer Tests", () => {
             ).toBeInTheDocument();
         }
     });
-    /*
+    
     test("Users can select a specific quiz to see the questions, including the questions name, body, and points", () => {
         const text = screen.getByText("Simple_Questions");
         text.click();
@@ -56,7 +56,7 @@ describe("Quizzer Tests", () => {
             screen.getByText("What is 2+2?", { exact: false })
         ).toBeInTheDocument();
         for (let i = 0; i < QUIZZES[1].questionList.length; i++) {
-            if (QUIZZES[1].questionList[i].published == true) {
+            if (QUIZZES[1].questionList[i].published) {
                 expect(
                     screen.getByText(QUIZZES[1].questionList[i].body, {
                         exact: false
@@ -225,7 +225,7 @@ describe("Quizzer Tests", () => {
         expect(afterOrder[1]).toHaveTextContent("What is 2+2?");
     });
 
-    test("Quiz questions can be of AT LEAST two types: a short answer question or multiple choice question ", () => {
+    test("Quiz questions can be of AT LEAST two types: a short answer question or multiple choice question", () => {
         const text = screen.getByText("Simple_Questions");
         text.click();
 
@@ -248,5 +248,5 @@ describe("Quizzer Tests", () => {
                 exact: false
             })[0]
         ).toBeInTheDocument();
-    });*/
+    });
 });
